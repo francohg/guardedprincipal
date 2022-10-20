@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Camiones</title>
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href="/index.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar fixed-top bg-dark">
+      <div class="container-fluid">
+        <img src="/logo.png" alt="guarded tranport" style="width: 50px;" />
+        <button
+          style="background-color: red;"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          style="background-color: grey; color: white;"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              Guarded Transport
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a
+                  style="color: white;"
+                  class="nav-link active link"
+                  aria-current="page"
+                  href="index.html"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  style="color: white;"
+                  class="nav-link active link"
+                  aria-current="page"
+                  href="#"
+                  >Camiones</a
+                >
+              </li>
+              <li class="nav-item">
+                <a style="color: white;" class="nav-link link" href="#"
+                  >Combustible</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a style="color: white;" class="nav-link link" href="#"
+                  >Ubicacion</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a style="color: white;" class="nav-link link" href="#"
+                  >Rutas</a
+                >
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Buscar Camion"
+                aria-label="Search"
+              />
+              <button
+                style="background-color: white;"
+                class="btn"
+                type="submit"
+              >
+                Buscar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <button></button>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="container">
+      <div class="row">
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          Agregar camion
+        </button>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <form
+              action="http://miserver.midominio.mipais/cgi-bin/test2-cgi"
+              method="POST"
+            >
+              <center>
+                <table border>
+                  <tr>
+                    <td>Placas:</td>
+                    <td>
+                      <input
+                        type="text"
+                        name="Placas"
+                        size="18"
+                        maxlength="18"
+                      />
+                      tipo de camion:
+                      <input type="text" name="edad" size="8" maxlength="8" />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Capacidad:</td>
+                    <td>
+                      <input
+                        type="number"
+                        name="capacidad"
+                        size="48"
+                        maxlength="48"
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><b>Pulse aquí:</b></td>
+                    <td align="CENTER">
+                      <input type="submit" value="Enviar datos " />
+                      <input type="reset" value="Borrar los datos" />
+                    </td>
+                  </tr>
+                </table>
+              </center>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="default" style="width: 100%;">
+            <tr>
+              <th>Camion</th>
+
+              <th>Combustible</th>
+
+              <th>Ubicacion</th>
+
+              <th>Ruta</th>
+            </tr>
+
+            <tr>
+              <td>E 13 km/h</td>
+
+              <td>E 11 km/h</td>
+
+              <td>S 16 km/h</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+  </body>
+  <footer
+    class="page-footer font-small blue pt-4"
+    style="background-color: black; color: white;"
+  >
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mt-3">
+          <!-- Content -->
+          <h5 class="text-uppercase">C. Jesse Salvador Sandoval Otamendi</h5>
+          <p>Director de servicios municipales</p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none pb-3" />
+
+        <!-- Grid column -->
+        <div class="col-md-3 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="text-uppercase">Instagram</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!"
+                ><img src="./i12.png" id="i" style="width: 30px;"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="text-uppercase">Facebook</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!"
+                ><img src="./i13.png" id="i" style="width: 30px;"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div
+      class="footer-copyright text-center py-3"
+      style="background-color: grey; color: white;"
+    >
+      © 2022 Copyright: Hernandez Franco Gilberto y Garcia Martinez Brian
+      Alfredo
+    </div>
+    <!-- Copyright -->
+  </footer>
+</html>

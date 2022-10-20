@@ -1,0 +1,20 @@
+.botongris {
+  background-color: white;
+  border: 5px solid #e7e7e7;
+}
+.img {
+  height: 200px;
+}
+.row {
+  text-align: center;
+}
+table {
+  background-color: black;
+  color: white;
+}
+td {
+  background-color: silver;
+  color: black;
+}
+
+
