@@ -41,17 +41,15 @@ class Usuarios
         }
     }
 
-    public function insertarcam($placas,$tipo,$capacidad,$ruta,$velocidad,$ubicacion)
+    public function insertarcam($placas,$tipo,$capacidad,$ruta)
     {
-        
+
         try {
-            $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?,?,?,?)");
+            $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?,?)");
             $query->bindParam(1, $placas);
             $query->bindParam(2, $tipo);
             $query->bindParam(3, $capacidad);
             $query->bindParam(4, $ruta);
-            $query->bindParam(5, $velocidad);
-            $query->bindParam(6, $ubicacion);
             $query->execute();
             return $query->fetchAll();
             $this->dbh = null;
@@ -59,7 +57,38 @@ class Usuarios
             $e->getMessage();
         }
     }
+    public function insertaruta($zona,$longitud,$latitud)
+    {
 
+        try {
+            $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?)");
+            $query->bindParam(1, $zona);
+            $query->bindParam(2, $longitud);
+            $query->bindParam(3, $latitud);
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+    public function insertarstatu($camion,$ruta,$latitud,$longitud,$velocidad,$combustible)
+    {
+        try {
+            $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?,?,?,?,?)");
+            $query->bindParam(1, $camion);
+            $query->bindParam(3, $ruta);
+            $query->bindParam(4, $latitud);
+            $query->bindParam(5, $longitud);
+            $query->bindParam(6, $velocidad);
+            $query->bindParam(7, $combustible);
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
     public function insertar($p1)
     {
         try {
