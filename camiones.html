@@ -79,34 +79,34 @@
       </button>
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
-          <form action="./inserta.php" method="POST">
+          <form>
             <center>
               <table>
                 <tr>
                   <td>Placas:</td>
                   <td>
-                    <input type="text" name="placas" size="18" maxlength="18" id="placa"/>
+                    <input type="text" name="placas" size="18" maxlength="18" id="placa" />
                     Tipo de camion:
-                    <input type="text" name="tipo" size="8" maxlength="8" />
+                    <input type="text" name="tipo" size="8" maxlength="8" id="tipo" />
                   </td>
                 </tr>
 
                 <tr>
                   <td>Capacidad:</td>
                   <td>
-                    <input type="number" name="capacidad" size="48" maxlength="48" id="capacidad"/>
+                    <input type="number" name="capacidad" size="48" maxlength="48" id="capacidad" />
                   </td>
                 </tr>
                 <tr>
                   <td>Ruta:</td>
                   <td>
-                    <input type="number" name="ruta" size="48" maxlength="48" />
+                    <input type="number" name="ruta" size="48" maxlength="48" id="ruta" />
                   </td>
                 </tr>
                 <tr>
                   <td><b>Pulse aquí:</b></td>
                   <td>
-                    <input type="submit" value="Enviar datos " />
+                    <input type="submit" value="Enviar datos " id="b1" />
                     <input type="reset" value="Borrar los datos" />
                   </td>
                 </tr>
@@ -205,3 +205,22 @@
 </footer>
 
 </html>
+<script src="./jquery-3.6.0.min.js"></script>
+<script>
+  $("#b1").click(function () {
+    alert("hola");
+    var placas = $("#placa").val();
+    var tipo = $("#tipo").val();
+    var caácidad = $("#capacidad").val();
+    var ruta = $("#ruta").val();
+    let parametros = {
+      "placas": placas,
+      "tipo": tipo,
+      "capacidad": capacidad,
+      "ruta": ruta
+    };
+    $.post("Consultas.php", parametros, function (resultado) {
+      alert("Operacion exitosa "+resultado);
+    });
+  });
+</script>

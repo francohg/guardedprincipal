@@ -9,7 +9,7 @@ class Usuarios
     {
         try {
 	    $servidor="localhost";
-	    $base="id19686397_transport.sql";
+	    $base="id19686397_transport";
 	    $usuario="root";
 	    $contrasenia="";
 	    $this->dbh = new PDO('mysql:host='.$servidor.';dbname='.$base, $usuario, $contrasenia);
@@ -52,6 +52,7 @@ class Usuarios
             $query->bindParam(4, $ruta);
             $query->execute();
             return $query->fetchAll();
+            echo "Se registro el camion";
             $this->dbh = null;
         }catch (PDOException $e) {
             $e->getMessage();
