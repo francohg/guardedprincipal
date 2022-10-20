@@ -9,7 +9,7 @@ class Usuarios
     {
         try {
 	    $servidor="localhost";
-	    $base="itesos";
+	    $base="id19686397_transport.sql";
 	    $usuario="root";
 	    $contrasenia="";
 	    $this->dbh = new PDO('mysql:host='.$servidor.';dbname='.$base, $usuario, $contrasenia);
@@ -21,7 +21,6 @@ class Usuarios
             die();
         }
     }
- 
     public static function singleton()
     {
         if (!isset(self::$instancia)) {
@@ -30,12 +29,29 @@ class Usuarios
         }
         return self::$instancia;
     }
- 
-    public function Consulta($correo)
+    public function Consulta()
     {
         try {
-            $query = $this->dbh->prepare("SELECT * FROM usuarios WHERE correo LIKE ?");
-            $query->bindParam(1, $correo);
+            $query = $this->dbh->prepare("SELECT * FROM camiones");
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+
+    public function insertarcam($placas,$tipo,$capacidad,$ruta,$velocidad,$ubicacion)
+    {
+        
+        try {
+            $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?,?,?,?)");
+            $query->bindParam(1, $placas);
+            $query->bindParam(2, $tipo);
+            $query->bindParam(3, $capacidad);
+            $query->bindParam(4, $ruta);
+            $query->bindParam(5, $velocidad);
+            $query->bindParam(6, $ubicacion);
             $query->execute();
             return $query->fetchAll();
             $this->dbh = null;
@@ -70,21 +86,18 @@ class Usuarios
         }
     }
  
-    public function Actualizar($p1,$p2)
+    public function Actualizar($camion,$ruta)
     {
         try {
-            $query = $this->dbh->prepare("UPDATE tabla SET campo1=? WHERE campo2 LIKE ?");
-            $query->bindParam(1, $p1);
-            $query->bindParam(2, $p2);
+            $query = $this->dbh->prepare("UPDATE tabla SET Id_ruta=? WHERE Id_camion LIKE ?");
+            $query->bindParam(1, $camion);
+            $query->bindParam(2, $ruta);
             $query->execute();
             $this->dbh = null;
         } catch (PDOException $e) {
             $e->getMessage();
         }
     }
-
-   
- 
     public function __clone()
     {
         trigger_error('La clonación no es permitida!.', E_USER_ERROR);
