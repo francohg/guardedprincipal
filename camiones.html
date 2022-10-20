@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Camiones</title>
   <link rel="shortcut icon" href="logo.png">
-  <link rel="stylesheet" href="/index.css" />
+  <link rel="stylesheet" href="./index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -106,7 +106,7 @@
                 <tr>
                   <td><b>Pulse aquí:</b></td>
                   <td>
-                    <input type="submit" value="Enviar datos " id="b1" />
+                    <button id="b1">Enviar datos</button>
                     <input type="reset" value="Borrar los datos" />
                   </td>
                 </tr>
@@ -208,10 +208,9 @@
 <script src="./jquery-3.6.0.min.js"></script>
 <script>
   $("#b1").click(function () {
-    alert("hola");
     var placas = $("#placa").val();
     var tipo = $("#tipo").val();
-    var caácidad = $("#capacidad").val();
+    var capacidad = $("#capacidad").val();
     var ruta = $("#ruta").val();
     let parametros = {
       "placas": placas,
@@ -219,8 +218,8 @@
       "capacidad": capacidad,
       "ruta": ruta
     };
-    $.post("Consultas.php", parametros, function (resultado) {
-      alert("Operacion exitosa "+resultado);
+    $.post("./inserta.php", parametros, function (resultado) {
+      alert(resultado);
     });
   });
 </script>

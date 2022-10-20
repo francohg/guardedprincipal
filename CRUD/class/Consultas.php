@@ -43,7 +43,6 @@ class Usuarios
 
     public function insertarcam($placas,$tipo,$capacidad,$ruta)
     {
-
         try {
             $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?,?)");
             $query->bindParam(1, $placas);
@@ -52,7 +51,6 @@ class Usuarios
             $query->bindParam(4, $ruta);
             $query->execute();
             return $query->fetchAll();
-            echo "Se registro el camion";
             $this->dbh = null;
         }catch (PDOException $e) {
             $e->getMessage();
