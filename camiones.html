@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar fixed-top bg-dark">
     <div class="container-fluid">
-      <img src="/logo.png" alt="guarded tranport" style="width: 50px;" />
+      <img src="./logo.png" alt="guarded tranport" style="width: 50px;" />
       <button style="background-color: red;" class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -40,16 +40,16 @@
               <a style="color: white;" class="nav-link active link" aria-current="page" href="index.html">Inicio</a>
             </li>
             <li class="nav-item">
-              <a style="color: white;" class="nav-link active link" aria-current="page" href="#">Camiones</a>
+              <a style="color: white;" class="nav-link active link" aria-current="page" href="camiones.html">Camiones</a>
             </li>
             <li class="nav-item">
-              <a style="color: white;" class="nav-link link" href="#">Combustible</a>
+              <a style="color: white;" class="nav-link link" href="combustible.html">Combustible</a>
             </li>
             <li class="nav-item dropdown">
-              <a style="color: white;" class="nav-link link" href="#">Ubicacion</a>
+              <a style="color: white;" class="nav-link link" href="ubicacion.html">Ubicacion</a>
             </li>
             <li class="nav-item dropdown">
-              <a style="color: white;" class="nav-link link" href="#">Rutas</a>
+              <a style="color: white;" class="nav-link link" href="Rutas.html">Rutas</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
@@ -106,7 +106,7 @@
                 <tr>
                   <td><b>Pulse aquí:</b></td>
                   <td>
-                    <button id="b1">Enviar datos</button>
+                    <button id="button">Enviar datos</button>
                     <input type="reset" value="Borrar los datos" />
                   </td>
                 </tr>
@@ -150,6 +150,26 @@
   <br /><br />
   <br /><br />
   <br /><br />
+  <script src="jquery-3.6.0.min.js"></script>
+  <script>
+    
+    $("#button").click(function () {
+
+      var placas = $("#placa").val();
+      var tipo = $("#tipo").val();
+      var capacidad = $("#capacidad").val();
+      var ruta = $("#ruta").val();
+      let parametros = {
+        "placas": placas,
+        "tipo": tipo,
+        "capacidad": capacidad,
+        "ruta": ruta
+      };
+      $.post(("./inserta.php", parametros, function (resultado) {
+        window.alert(resultado);
+      }));
+    });
+  </script>
 </body>
 <footer class="page-footer font-small blue pt-4" style="background-color: black; color: white;">
   <!-- Footer Links -->
@@ -205,21 +225,3 @@
 </footer>
 
 </html>
-<script src="./jquery-3.6.0.min.js"></script>
-<script>
-  $("#b1").click(function () {
-    var placas = $("#placa").val();
-    var tipo = $("#tipo").val();
-    var capacidad = $("#capacidad").val();
-    var ruta = $("#ruta").val();
-    let parametros = {
-      "placas": placas,
-      "tipo": tipo,
-      "capacidad": capacidad,
-      "ruta": ruta
-    };
-    $.post("./inserta.php", parametros, function (resultado) {
-      alert(resultado);
-    });
-  });
-</script>
