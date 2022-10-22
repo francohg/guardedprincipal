@@ -40,7 +40,29 @@ class Usuarios
             $e->getMessage();
         }
     }
-
+    public function Consultasta($id)
+    {
+        try {
+            $query = $this->dbh->prepare("SELECT * FROM 'status' WHERE Id_camion Like ?");
+            $query->bindParam(1, $id);
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+    public function Consultastatus()
+    {
+        try {
+            $query = $this->dbh->prepare("SELECT * FROM 'status'");
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
     public function insertarcam($placas,$tipo,$capacidad,$ruta)
     {
         try {
@@ -74,7 +96,7 @@ class Usuarios
     public function insertarstatu($camion,$ruta,$latitud,$longitud,$velocidad,$combustible)
     {
         try {
-            $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?,?,?,?,?)");
+            $query = $this->dbh->prepare("INSERT INTO 'status' VALUES ('',?,?,?,?,?,?,?)");
             $query->bindParam(1, $camion);
             $query->bindParam(3, $ruta);
             $query->bindParam(4, $latitud);

@@ -25,9 +25,8 @@
 
             var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                ['Velocidad', 80],
-                ['Combustible', 55],
-                ['Network', 68]
+                ['Velocidad', 00],
+                ['Combustible', 0],
             ]);
 
             var options = {
@@ -42,15 +41,15 @@
             chart.draw(data, options);
 
             setInterval(function () {
-                data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+                data.setValue(0, 1, 50);
                 chart.draw(data, options);
             }, 13000);
             setInterval(function () {
-                data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+                data.setValue(1, 1, 10);
                 chart.draw(data, options);
             }, 5000);
             setInterval(function () {
-                data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+                data.setValue(2, 1, 20);
                 chart.draw(data, options);
             }, 26000);
         }
@@ -116,9 +115,6 @@
                 <center>
                     <select name="rutas" id="pet-select">
                         <option value="">Escoge una camion</option>
-                        <option value="1">Camion 1</option>
-                        <option value="2">Camion 2</option>
-                        <option value="3">Camion 3</option>
                       </select>
                 </center>
             </div>
@@ -193,3 +189,28 @@
 </footer>
 
 </html>
+<script src="jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $.post("consultrutas.php", function (resp) {
+      var a = resp.split("\n");
+      const date = new Date();
+      for (var i = 0; i < a.length - 1; i++) {
+        var b = a[i].split("/*-");
+        var con = '<option value="'+b[0]+'">Camion '+b[0]+'</option>';
+        $('#pet-select').append(con);
+      }
+    });
+  });
+
+  function registra(camion,i) {
+    ruta=document.getElementById('select'+i).value;
+    let parametros = {
+      "camion": camion,
+      "ruta": ruta
+    };
+    $.post("actualizaruta.php", parametros, function (resultado) {
+      alert("Operacion exitosa "+resultado);
+    });
+  }
+</script>
