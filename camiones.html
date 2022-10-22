@@ -40,7 +40,8 @@
               <a style="color: white;" class="nav-link active link" aria-current="page" href="index.html">Inicio</a>
             </li>
             <li class="nav-item">
-              <a style="color: white;" class="nav-link active link" aria-current="page" href="camiones.html">Camiones</a>
+              <a style="color: white;" class="nav-link active link" aria-current="page"
+                href="camiones.html">Camiones</a>
             </li>
             <li class="nav-item">
               <a style="color: white;" class="nav-link link" href="combustible.html">Combustible</a>
@@ -79,40 +80,38 @@
       </button>
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
-          <form>
-            <center>
-              <table>
-                <tr>
-                  <td>Placas:</td>
-                  <td>
-                    <input type="text" name="placas" size="18" maxlength="18" id="placa" />
-                    Tipo de camion:
-                    <input type="text" name="tipo" size="8" maxlength="8" id="tipo" />
-                  </td>
-                </tr>
+          <center>
+            <table>
+              <tr>
+                <td>Placas:</td>
+                <td>
+                  <input type="text" name="placas" size="18" maxlength="18" id="placa" />
+                  Tipo de camion:
+                  <input type="text" name="tipo" size="8" maxlength="8" id="tipo" />
+                </td>
+              </tr>
 
-                <tr>
-                  <td>Capacidad:</td>
-                  <td>
-                    <input type="number" name="capacidad" size="48" maxlength="48" id="capacidad" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Ruta:</td>
-                  <td>
-                    <input type="number" name="ruta" size="48" maxlength="48" id="ruta" />
-                  </td>
-                </tr>
-                <tr>
-                  <td><b>Pulse aquí:</b></td>
-                  <td>
-                    <button id="button">Enviar datos</button>
-                    <input type="reset" value="Borrar los datos" />
-                  </td>
-                </tr>
-              </table>
-            </center>
-          </form>
+              <tr>
+                <td>Capacidad:</td>
+                <td>
+                  <input type="number" name="capacidad" size="48" maxlength="48" id="capacidad" />
+                </td>
+              </tr>
+              <tr>
+                <td>Ruta:</td>
+                <td>
+                  <input type="number" name="ruta" size="48" maxlength="48" id="ruta" />
+                </td>
+              </tr>
+              <tr>
+                <td><b>Pulse aquí:</b></td>
+                <td>
+                  <button onclick=registra()>Enviar datos</button>
+                  <input type="reset" value="Borrar los datos" />
+                </td>
+              </tr>
+            </table>
+          </center>
         </div>
       </div>
     </div>
@@ -150,26 +149,6 @@
   <br /><br />
   <br /><br />
   <br /><br />
-  <script src="jquery-3.6.0.min.js"></script>
-  <script>
-    
-    $("#button").click(function () {
-
-      var placas = $("#placa").val();
-      var tipo = $("#tipo").val();
-      var capacidad = $("#capacidad").val();
-      var ruta = $("#ruta").val();
-      let parametros = {
-        "placas": placas,
-        "tipo": tipo,
-        "capacidad": capacidad,
-        "ruta": ruta
-      };
-      $.post(("./inserta.php", parametros, function (resultado) {
-        window.alert(resultado);
-      }));
-    });
-  </script>
 </body>
 <footer class="page-footer font-small blue pt-4" style="background-color: black; color: white;">
   <!-- Footer Links -->
@@ -225,3 +204,21 @@
 </footer>
 
 </html>
+<script src="jquery-3.6.0.min.js"></script>
+<script>
+  function registra() {
+    var placas = $("#placa").val();
+    var tipo = $("#tipo").val();
+    var capacidad = $("#capacidad").val();
+    var ruta = $("#ruta").val();
+    let parametros = {
+      "placas": placas,
+      "tipo": tipo,
+      "capacidad": capacidad,
+      "ruta": ruta
+    };
+    $.post("post.php", parametros, function (resultado) {
+      alert("Operacion exitosa " + resultado);
+    });
+  }
+</script>

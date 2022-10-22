@@ -40,7 +40,8 @@
               <a style="color: white;" class="nav-link active link" aria-current="page" href="index.html">Inicio</a>
             </li>
             <li class="nav-item">
-              <a style="color: white;" class="nav-link active link" aria-current="page" href="camiones.html">Camiones</a>
+              <a style="color: white;" class="nav-link active link" aria-current="page"
+                href="camiones.html">Camiones</a>
             </li>
             <li class="nav-item">
               <a style="color: white;" class="nav-link link" href="combustible.html">Combustible</a>
@@ -70,7 +71,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <table class="default" style="width: 100%;">
+        <table class="default" style="width: 100%;" id="tb1">
           <tr>
             <th>Camion</th>
 
@@ -81,22 +82,8 @@
             <th>Ruta actual</th>
           </tr>
 
-          <tr>
-            <td>1</td>
 
-            <td>
-              <select name="rutas" id="pet-select">
-                <option value="">Escoje una ruta</option>
-                <option value="1">Ruta 1</option>
-                <option value="2">Ruta 2</option>
-                <option value="3">Ruta 3</option>
-              </select>
-            </td>
 
-            <td><button>Actualizar</button></td>
-
-            <td><a href="Mapa.html"> S 16 km/h</a></td>
-          </tr>
         </table>
       </div>
     </div>
@@ -108,7 +95,7 @@
   <br /><br />
   <br /><br />
   <br /><br />
-  <br /><br />
+  <br />
 </body>
 
 <footer class="page-footer font-small blue pt-4" style="background-color: black; color: white;">
@@ -165,3 +152,33 @@
 </footer>
 
 </html>
+<script src="jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $.post("consultrutas.php", function (resp) {
+      var a = resp.split("\n");
+      const date = new Date();
+      for (var i = 0; i < a.length - 1; i++) {
+        var b = a[i].split("/*-");
+        var relleno = "'" + b[0] + "','"+i+"'";
+        var con = '<tr>' +
+          '<td>' + b[0] + '</td><td><select name="rutas" id="select'+i+'"><option value="">Escoje una ruta</option>' +
+          '<option value="1">Ruta 1</option><option value="2">Ruta 2</option>' +
+          '<option value="3">Ruta 3</option></select></td>' +
+          '<td><button onclick="registra(' + relleno + ')">Actualizar</button></td><td>' + b[1] + '</td></tr>';
+        $('#tb1').append(con);
+      }
+    });
+  });
+
+  function registra(camion,i) {
+    ruta=document.getElementById('select'+i).value;
+    let parametros = {
+      "camion": camion,
+      "ruta": ruta
+    };
+    $.post("actualizaruta.php", parametros, function (resultado) {
+      alert("Operacion exitosa "+resultado);
+    });
+  }
+</script>

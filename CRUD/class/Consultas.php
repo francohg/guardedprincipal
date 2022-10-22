@@ -44,7 +44,7 @@ class Usuarios
     public function insertarcam($placas,$tipo,$capacidad,$ruta)
     {
         try {
-            $query = $this->dbh->prepare("INSERT INTO camiones VALUES ('',?,?,?,?)");
+            $query = $this->dbh->prepare("INSERT INTO camiones VALUES (NULL,?,?,?,?)");
             $query->bindParam(1, $placas);
             $query->bindParam(2, $tipo);
             $query->bindParam(3, $capacidad);
@@ -117,9 +117,9 @@ class Usuarios
     public function Actualizar($camion,$ruta)
     {
         try {
-            $query = $this->dbh->prepare("UPDATE tabla SET Id_ruta=? WHERE Id_camion LIKE ?");
-            $query->bindParam(1, $camion);
-            $query->bindParam(2, $ruta);
+            $query = $this->dbh->prepare("UPDATE camiones SET Id_ruta=? WHERE Id_camion LIKE ?");
+            $query->bindParam(1, $ruta);
+            $query->bindParam(2, $camion);
             $query->execute();
             $this->dbh = null;
         } catch (PDOException $e) {
