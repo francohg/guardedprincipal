@@ -18,11 +18,11 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+        let id=1,combus=0,vel=0;
         google.charts.load('current', { 'packages': ['gauge'] });
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-
             var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
                 ['Velocidad', 00],
@@ -30,7 +30,7 @@
             ]);
 
             var options = {
-                width: 800, height: 240,
+                width: 600, height: 240,
                 redFrom: 90, redTo: 100,
                 yellowFrom: 75, yellowTo: 90,
                 minorTicks: 5
@@ -41,17 +41,14 @@
             chart.draw(data, options);
 
             setInterval(function () {
-                data.setValue(0, 1, 50);
+                data.setValue(0, 1, actualizave());
                 chart.draw(data, options);
-            }, 13000);
+            }, 2000);
             setInterval(function () {
-                data.setValue(1, 1, 10);
+                data.setValue(1, 1, actualizacom());
                 chart.draw(data, options);
-            }, 5000);
-            setInterval(function () {
-                data.setValue(2, 1, 20);
-                chart.draw(data, options);
-            }, 26000);
+            }, 2000);
+            
         }
     </script>
 </head>
@@ -182,8 +179,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3" style="background-color: grey; color: white;">
-        © 2022 Copyright: Hernandez Franco Gilberto y Garcia Martinez Brian
-        Alfredo
+        © 2022 Copyright: Hernandez Franco Gilberto y Garcia Martinez Brian Alfredo
     </div>
     <!-- Copyright -->
 </footer>
@@ -197,20 +193,33 @@
       const date = new Date();
       for (var i = 0; i < a.length - 1; i++) {
         var b = a[i].split("/*-");
-        var con = '<option value="'+b[0]+'">Camion '+b[0]+'</option>';
+        relleno="'"+b[0]+"'"
+        var con = '<option value='+relleno+' onclick=" registra('+b[0]+')">Camion '+b[0]+'</option>';
         $('#pet-select').append(con);
       }
     });
   });
 
-  function registra(camion,i) {
-    ruta=document.getElementById('select'+i).value;
+  function registra(idd) {
+    id=idd;
     let parametros = {
-      "camion": camion,
-      "ruta": ruta
+      "id": id
     };
-    $.post("actualizaruta.php", parametros, function (resultado) {
-      alert("Operacion exitosa "+resultado);
+    $.post("consultastatus.php", parametros, function (resultado) {
+      //alert("Operacion exitosa "+resultado);
+      var a = resultado.split("$$$");
+      a = a[1].split("///");
+      //alert("combustible "+a[1])
+    combus=a[1];
+    vel=a[0]
     });
+  }
+  function actualizave() {
+    registra(id);
+    return vel;
+  }
+  function actualizacom() {
+    registra(id);
+    return combus;
   }
 </script>

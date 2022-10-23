@@ -43,7 +43,7 @@ class Usuarios
     public function Consultasta($id)
     {
         try {
-            $query = $this->dbh->prepare("SELECT * FROM 'status' WHERE Id_camion Like ?");
+            $query = $this->dbh->prepare("SELECT * FROM status WHERE Id_camion Like ?");
             $query->bindParam(1, $id);
             $query->execute();
             return $query->fetchAll();

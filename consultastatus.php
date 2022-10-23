@@ -11,6 +11,8 @@ if (count($data) > 0) {
         $vel = $fila["Velocidad"];
         $com = $fila["Combustible"];
     }
-    echo $ruta."/*-".$lat."+-+".$lon."$$$".$vel."$com";
+    echo $ruta."/*-".$lat."+-+".$lon."$$$".$vel."///".$com;
+}else{
+    echo "vacio";
 }
 ?>
