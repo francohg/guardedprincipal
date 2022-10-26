@@ -47,9 +47,6 @@
               <a style="color: white;" class="nav-link link" href="combustible.html">Combustible</a>
             </li>
             <li class="nav-item dropdown">
-              <a style="color: white;" class="nav-link link" href="ubicacion.html">Ubicacion</a>
-            </li>
-            <li class="nav-item dropdown">
               <a style="color: white;" class="nav-link link" href="Rutas.html">Rutas</a>
             </li>
           </ul>
@@ -122,24 +119,26 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <table class="default" style="width: 100%;">
+        <center>
+          <select name="rutas" id="pet-select">
+            <option value="">Escoge una camion</option>
+          </select>
+        </center>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="default" style="width: 100%;" id="tab1">
           <tr>
-            <th>Camion</th>
-
             <th>Combustible</th>
 
             <th>Ubicacion</th>
 
             <th>Ruta</th>
+
+            <th>Velocidad</th>
           </tr>
 
-          <tr>
-            <td>E 13 km/h</td>
-
-            <td>E 11 km/h</td>
-
-            <td>S 16 km/h</td>
-          </tr>
         </table>
       </div>
     </div>
@@ -219,6 +218,39 @@
     };
     $.post("post.php", parametros, function (resultado) {
       alert("Operacion exitosa " + resultado);
+    });
+  }
+  //$ruta."/*-".$lat."+-+".$lon."$$$".$vel."///".$com
+  var com="vacio", ruta="vacio", lat="vacio", lon="vacio", vel="vacio";
+  $(document).ready(function () {
+    $.post("consultrutas.php", function (resp) {
+      var a = resp.split("\n");
+      const date = new Date();
+      for (var i = 0; i < a.length - 1; i++) {
+        var b = a[i].split("/*-");
+        relleno = "'" + b[0] + "'"
+        var con = '<option value=' + relleno + ' onclick=" registra(' + b[0] + ')">Camion ' + b[0] + '</option>';
+        $('#pet-select').append(con);
+      }
+    });
+  });
+  function registra(id) {
+    let parametros = {
+      "id": id
+    };
+    $.post("consultastatus.php", parametros, function (resultado) {
+      //alert("Operacion exitosa "+resultado);
+      ruta = resultado.split("/*-");
+      lat = ruta[1].split("+-+");
+      lon = lat[1].split("$$$");
+      vel = lon[1].split("///");
+      com = vel[1];
+      var con = '<tr>'+
+            '<td>'+com+'</td>'+
+            '<td>'+lon[0]+','+lat[0]+'</td>'+
+            '<td>'+ruta[0]+'</td>'+
+            '<td>'+vel[0]+'</td> </tr>';
+    $('#tab1').append(con);
     });
   }
 </script>
