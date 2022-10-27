@@ -221,7 +221,7 @@
     });
   }
   //$ruta."/*-".$lat."+-+".$lon."$$$".$vel."///".$com
-  var com="vacio", ruta="vacio", lat="vacio", lon="vacio", vel="vacio";
+ // var com="vacio", ruta="vacio", lat="vacio", lon="vacio", vel="vacio";
   $(document).ready(function () {
     $.post("consultrutas.php", function (resp) {
       var a = resp.split("\n");
@@ -229,12 +229,12 @@
       for (var i = 0; i < a.length - 1; i++) {
         var b = a[i].split("/*-");
         relleno = "'" + b[0] + "'"
-        var con = '<option value=' + relleno + ' onclick=" registra(' + b[0] + ')">Camion ' + b[0] + '</option>';
+        var con = '<option value=' + relleno + ' onclick=" registra1(' + b[0] + ')">Camion ' + b[0] + '</option>';
         $('#pet-select').append(con);
       }
     });
   });
-  function registra(id) {
+  function registra1(id) {
     let parametros = {
       "id": id
     };
