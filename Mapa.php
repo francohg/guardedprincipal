@@ -29,7 +29,9 @@ $lon = $_GET["lon"];
         var lat,lon;
         lat=<?php echo $lat; ?>;
         lon=<?php echo $lon; ?>;  
-        const coords = { lat: lat, lng: lon };
+        //const coords = { lat: lat, lng: lon };
+        const coords = { lat: 19.728796, lng: -98.467547 };
+        const coords2 = { lat: 19.709444, lng: -98.450000 };
         const mapDiv = document.getElementById("map");
         let map;
         let marker;
@@ -44,6 +46,29 @@ $lon = $_GET["lon"];
                 position: coords,
                 map: map,
             })
+            marker = new google.maps.Marker({
+                position: coords2,
+                map: map,
+            })
+            var objConfigDr ={
+              map: map
+            }
+            var objConfigDs ={
+              origin: coords2,
+              destination: coords,
+              travelMode: google.maps.TravelMode.DRIVING
+            }
+            var ds = new google.maps.DirectionsService();
+            var dr = new google.maps.DirectionsRenderer(objConfigDr);
+
+            ds.route(objConfigDs,fnRutear);
+            function fnRutear(resultados,status){
+              if (status == 'OK') {
+                dr.setDirections(resultados); 
+              }else{
+                alert('Error'+status);
+              }
+            }
         }
 
         window.initMap = initMap;
