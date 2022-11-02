@@ -270,10 +270,13 @@
       com = vel[1];
       var con = '<tr>' +
         '<td>' + com + '</td>' +
-        '<td>' + lon[0] + ',' + lat[0] + '</td>' +
+        '<td onclick=" mapa(' + lon[0] + ','+lat[0]+')">' + lon[0] + ',' + lat[0] + '</td>' +
         '<td>' + ruta[0] + '</td>' +
         '<td>' + vel[0] + '</td> </tr>';
       $('#tab1').append(con);
     });
+  }
+  function mapa(lon,lat){
+    window.location.href = "mapa.php?lat="+lat+"&lon="+lon;
   }
 </script>
