@@ -40,6 +40,18 @@ class Usuarios
             $e->getMessage();
         }
     }
+    public function Consultacma($id)
+    {
+        try {
+            $query = $this->dbh->prepare("SELECT * FROM camiones WHERE Id_camion Like ?");
+            $query->bindParam(1, $id);
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
     public function Consultasta($id)
     {
         try {
@@ -93,16 +105,17 @@ class Usuarios
             $e->getMessage();
         }
     }
-    public function insertarstatu($camion,$ruta,$latitud,$longitud,$velocidad,$combustible)
+    public function insertarstatu($camion,$ruta,$latitud,$longitud,$velocidad,$combustible,$fecha)
     {
         try {
-            $query = $this->dbh->prepare("INSERT INTO 'status' VALUES ('',?,?,?,?,?,?,?)");
+            $query = $this->dbh->prepare("INSERT INTO status VALUES (NULL,?,?,?,?,?,?,?)");
             $query->bindParam(1, $camion);
-            $query->bindParam(3, $ruta);
-            $query->bindParam(4, $latitud);
-            $query->bindParam(5, $longitud);
-            $query->bindParam(6, $velocidad);
-            $query->bindParam(7, $combustible);
+            $query->bindParam(2, $ruta);
+            $query->bindParam(3, $latitud);
+            $query->bindParam(4, $longitud);
+            $query->bindParam(5, $velocidad);
+            $query->bindParam(6, $combustible);
+            $query->bindParam(7, $fecha);
             $query->execute();
             return $query->fetchAll();
             $this->dbh = null;

@@ -1,0 +1,24 @@
+body{
+    background-image: url("./img1.jpg");
+    background-size: 100%;
+}
+#titulo{
+    text-align: center;
+    font-family: Verdana;
+    font-family: 'PT Sans';
+    color: brown;
+    margin-top: 10%;
+}
+#inic{
+    text-align: center;
+    margin-left: 33%;
+}
+#card{
+    color: brown;
+    background-color: white;
+    padding: 20px;
+    opacity: 70%;
+}
+#img {
+    height: 100px;
+  }
