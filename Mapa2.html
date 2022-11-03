@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa</title>
+    <title>Document</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <style>
         #map {
@@ -20,7 +20,6 @@
 <body>
     <div id="map"></div>
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtZuajwACPCG5YRVGAu92VJ7eLlNQMEyM&callback=initMap"></script>
-    
     <script>
         const coords = { lat: 19.770797, lng: -98.571165 };
         const coords2 = { lat: 19.770665, lng: -98.571581 };
@@ -38,18 +37,18 @@
         let marker;
 
         function initMap(){
+            
+            map = new google.maps.Map(mapDiv, {
+            center: coords,
+            zoom: 14,
+            });
             let n = 0;
             let m = 1;
             let arreglo = [coords,coords2,coords4,coords5,coords6,coords7,coords8,coords10,coords11,coords12,coords15];
-            map = new google.maps.Map(mapDiv, {
-            center: coords,
-            zoom: 8,
-            });
 
             function recorrido(){
-                if (n<arreglo.length) {
-                  
-                  var objConfigDr ={
+                if (n<arreglo.length) { 
+                    var objConfigDr ={
                     map: map
                   }
                   var objConfigDs ={
@@ -68,15 +67,20 @@
                       alert('Error'+status);
                     }
                   }
-                  n = n + 1;
-                  m = m + 1;
-                  recorrido();
+                    n = n + 1;
+                    m = m + 1;
+                    temporizadorDeRetraso();
                 }
             }
-            
+            let identificadorTiempoDeEspera;
+            function temporizadorDeRetraso() {
+                identificadorTiempoDeEspera = setInterval(recorrido,15000);
+            }
+            temporizadorDeRetraso();
             recorrido();
         }
         window.initMap = initMap;
     </script>
+    
 </body>
 </html>
