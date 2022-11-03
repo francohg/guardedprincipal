@@ -22,46 +22,59 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtZuajwACPCG5YRVGAu92VJ7eLlNQMEyM&callback=initMap"></script>
     
     <script>
-        const coords = { lat: 19.728796, lng: -98.467547 };
-        const coords2 = { lat: 19.709444, lng: -98.450000 };
+        const coords = { lat: 19.770797, lng: -98.571165 };
+        const coords2 = { lat: 19.770665, lng: -98.571581 };
+        const coords4 = { lat: 19.772133, lng: -98.573206 };
+        const coords5 = { lat: 19.770508, lng: -98.572727 };
+        const coords6 = { lat: 19.770081, lng: -98.573652 };
+        const coords7 = { lat: 19.771638, lng: -98.574328 };
+        const coords8 = { lat: 19.771758, lng: -98.574642 };
+        const coords10 = { lat: 19.770157, lng: -98.574931 };
+        const coords11 = { lat: 19.769459, lng: -98.575746 };
+        const coords12 = { lat: 19.771037, lng: -98.576507 };
+        const coords15 = { lat: 19.770476, lng: -98.579261 };
         const mapDiv = document.getElementById("map");
         let map;
         let marker;
 
         function initMap(){
+            let n = 0;
+            let m = 1;
+            let arreglo = [coords,coords2,coords4,coords5,coords6,coords7,coords8,coords10,coords11,coords12,coords15];
             map = new google.maps.Map(mapDiv, {
             center: coords,
             zoom: 8,
             });
 
-            marker = new google.maps.Marker({
-                position: coords,
-                map: map,
-            })
-            marker = new google.maps.Marker({
-                position: coords2,
-                map: map,
-            })
+            function recorrido(){
+                if (n<arreglo.length) {
+                  
+                  var objConfigDr ={
+                    map: map
+                  }
+                  var objConfigDs ={
+                    origin: arreglo[n],
+                    destination: arreglo[m],
+                    travelMode: google.maps.TravelMode.DRIVING
+                  }
+                  var ds = new google.maps.DirectionsService();
+                  var dr = new google.maps.DirectionsRenderer(objConfigDr);
 
-            var objConfigDr ={
-              map: map
+                  ds.route(objConfigDs,fnRutear);
+                  function fnRutear(resultados,status){
+                    if (status == 'OK') {
+                      dr.setDirections(resultados); 
+                    }else{
+                      alert('Error'+status);
+                    }
+                  }
+                  n = n + 1;
+                  m = m + 1;
+                  recorrido();
+                }
             }
-            var objConfigDs ={
-              origin: coords2,
-              destination: coords,
-              travelMode: google.maps.TravelMode.DRIVING
-            }
-            var ds = new google.maps.DirectionsService();
-            var dr = new google.maps.DirectionsRenderer(objConfigDr);
-
-            ds.route(objConfigDs,fnRutear);
-            function fnRutear(resultados,status){
-              if (status == 'OK') {
-                dr.setDirections(resultados); 
-              }else{
-                alert('Error'+status);
-              }
-            }
+            
+            recorrido();
         }
         window.initMap = initMap;
     </script>
