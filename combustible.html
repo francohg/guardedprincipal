@@ -98,7 +98,7 @@
         </div>
     </nav>
 
-    <br />
+
     <br />
     <br />
     <br />
@@ -122,9 +122,20 @@
                 </center>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <center><div id="card" class="col-lg-4 card">
+                <h4>Combustible inicial del dia</h4>
+                <h5 id="comini">Lts</h5>
+                <h4>Ultimo combustible registrado</h4>
+                <h5 id="comfin">Lts</h5>
+                <h4>Combustible utilizado</h4>
+                <h5 id="result">Lts</h5>
+            </div>
+        </center>
+        </div>
     </div>
     <br />
-    <br /><br />
     <br />
 
 </body>
@@ -196,7 +207,7 @@
       }
     });
   });
-
+  let c2=0;
   function registra(idd) {
     id=idd;
     let parametros = {
@@ -208,8 +219,20 @@
       a = a[1].split("///");
       //alert("combustible "+a[1])
     combus=a[1];
-    vel=a[0]
+    $('#comfin').html(combus+"Lts");
+    vel=a[0];
     });
+    $.post("consultasta.php", parametros, function (resultado) {
+      //alert("Operacion exitosa "+resultado);
+      var a = resultado.split("$$$");
+      a = a[1].split("///");
+      //alert("combustible "+a[1])
+    c2=a[1];
+    $('#comini').html(c2+"Lts");
+    });
+    total=parseFloat(c2)-parseFloat(combus);
+    console.log("total: "+c2);
+    $('#result').html(total+"Lts");
   }
   function actualizave() {
     registra(id);

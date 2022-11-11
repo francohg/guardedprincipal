@@ -16,5 +16,9 @@ td {
   background-color: silver;
   color: black;
 }
-
+#card{
+  background-color: black;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+}
 

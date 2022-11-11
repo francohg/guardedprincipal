@@ -55,8 +55,10 @@ class Usuarios
     public function Consultasta($id)
     {
         try {
-            $query = $this->dbh->prepare("SELECT * FROM status WHERE Id_camion Like ?");
+            $fecha = (string)date("j, n, Y");
+            $query = $this->dbh->prepare("SELECT * FROM status WHERE Id_camion Like ? and Fecha Like ?");
             $query->bindParam(1, $id);
+            $query->bindParam(2, $fecha);
             $query->execute();
             return $query->fetchAll();
             $this->dbh = null;
@@ -68,6 +70,19 @@ class Usuarios
     {
         try {
             $query = $this->dbh->prepare("SELECT * FROM 'status'");
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+
+    public function Consultaruta($id)
+    {
+        try {
+            $query = $this->dbh->prepare("SELECT Longitud,Latitud FROM rutas WHERE Id_ruta like ?");
+            $query->bindParam(1, $id);
             $query->execute();
             return $query->fetchAll();
             $this->dbh = null;

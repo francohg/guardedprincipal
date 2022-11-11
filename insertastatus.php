@@ -7,7 +7,7 @@ $velocidad=$_POST['velocidad'];
 $combustible=$_POST['combustible'];
 require_once("./CRUD/class/Consultas.php");
 $usuarios = Usuarios::singleton();
-$fecha = (string)date("j, n, Y");;
+$fecha = (string)date("j, n, Y");
 $usuarios->insertarstatu($camion,$ruta,$latitud,$longitud,$velocidad,$combustible,$fecha);
 $data=$usuarios->Consultacma($camion);
 if (count($data) > 0) {
