@@ -54,7 +54,7 @@ $id = $_GET["camion"];
 
 <body>
   <div id="map"></div>
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtZuajwACPCG5YRVGAu92VJ7eLlNQMEyM&callback=initMap"></script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5oP8S4r-3tx5tyKndm9ypKbfSrofvGfo&callback=initMap"></script>
   <script>
     const coords = {
       lat: 19.770797,
