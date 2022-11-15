@@ -3,6 +3,7 @@ $id = $_GET["camion"];
 ?>
 <script src="jquery-3.6.0.min.js"></script>
 <script>
+  let arreglo = [];
   $(document).ready(function() {
     var rut="";
     var id = <?php echo $id; ?>;
@@ -20,11 +21,20 @@ $id = $_GET["camion"];
       var b = resultado.split("/*-");
       alert("longitud:"+b[0]+" latitud:"+b[1]);
     });
-    $.post("consulstat.php", parametros, function (resp) {
+    //$.post("consulstat.php", parametros, function (resp) {
+      //var a = resp.split("\n");
+      //for (var i = 0; i < a.length - 1; i++) {
+        //var b = a[i].split("+-+");
+        //alert("Longitud:"+b[0]+" Latitud:"+b[1]);
+      //}
+    //});
+      $.post("consulstat.php", parametros, function (resp) {
       var a = resp.split("\n");
       for (var i = 0; i < a.length - 1; i++) {
         var b = a[i].split("+-+");
         alert("Longitud:"+b[0]+" Latitud:"+b[1]);
+        const coords = { lat: b[1], lng: b[0] };
+        arreglo.push(coords);
       }
     });
   });
@@ -56,50 +66,6 @@ $id = $_GET["camion"];
   <div id="map"></div>
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5oP8S4r-3tx5tyKndm9ypKbfSrofvGfo&callback=initMap"></script>
   <script>
-    const coords = {
-      lat: 19.770797,
-      lng: -98.571165
-    };
-    const coords2 = {
-      lat: 19.770665,
-      lng: -98.571581
-    };
-    const coords4 = {
-      lat: 19.772133,
-      lng: -98.573206
-    };
-    const coords5 = {
-      lat: 19.770508,
-      lng: -98.572727
-    };
-    const coords6 = {
-      lat: 19.770081,
-      lng: -98.573652
-    };
-    const coords7 = {
-      lat: 19.771638,
-      lng: -98.574328
-    };
-    const coords8 = {
-      lat: 19.771758,
-      lng: -98.574642
-    };
-    const coords10 = {
-      lat: 19.770157,
-      lng: -98.574931
-    };
-    const coords11 = {
-      lat: 19.769459,
-      lng: -98.575746
-    };
-    const coords12 = {
-      lat: 19.771037,
-      lng: -98.576507
-    };
-    const coords15 = {
-      lat: 19.770476,
-      lng: -98.579261
-    };
     const mapDiv = document.getElementById("map");
     let map;
     let marker;
@@ -112,7 +78,6 @@ $id = $_GET["camion"];
       });
       let n = 0;
       let m = 1;
-      let arreglo = [coords, coords2, coords4, coords5, coords6, coords7, coords8, coords10, coords11, coords12, coords15];
 
       function recorrido() {
         if (n < arreglo.length) {
