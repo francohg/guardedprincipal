@@ -55,10 +55,8 @@ class Usuarios
     public function Consultasta($id)
     {
         try {
-            $fecha = (string)date("j, n, Y");
-            $query = $this->dbh->prepare("SELECT * FROM status WHERE Id_camion Like ? and Fecha Like ?");
+            $query = $this->dbh->prepare("SELECT * FROM status WHERE Id_camion Like ?");
             $query->bindParam(1, $id);
-            $query->bindParam(2, $fecha);
             $query->execute();
             return $query->fetchAll();
             $this->dbh = null;

@@ -8,11 +8,11 @@ $id = $_GET["camion"];
     var id = <?php echo $id; ?>;
     let parametros = {
       "id": id
-    };
+    }; 
     $.post("consultacam.php", parametros, function(resultado) {
       rut = resultado;
     });
-    alert(rut);
+    alert(rut+"Bienvenido a las rutas ");
     let parametros1 = {
       "ruta": rut
     };
