@@ -18,3 +18,16 @@ if (count($data) > 0) {
     }
     echo $cuen;
 }
+$data=$usuarios->Consultaruta($cuen);
+if (count($data) > 0) {
+    foreach ($data as $fila) {
+        $lon = $fila["Longitud"];
+        $lat = $fila["Latitud"];
+        break;
+    }
+}
+$londif = explode(",", $lon);
+$latdif = explode(",", $lat);
+if($londif[$cont]!=$longitud[$cont]||$latdif[$cont]!=$latitud[$cont]){
+    $usuarios->insertaalerta("El camion ".$camion." se salio de la ruta ".$cuen,$camion,$fecha);
+}

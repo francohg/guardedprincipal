@@ -103,6 +103,20 @@ class Usuarios
             $e->getMessage();
         }
     }
+    public function insertaalerta($tip,$camion,$fecha)
+    {
+        try {
+            $query = $this->dbh->prepare("INSERT INTO alertas VALUES (NULL,?,?,?)");
+            $query->bindParam(1, $tip);
+            $query->bindParam(2, $camion);
+            $query->bindParam(3, $fecha);
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
     public function insertaruta($zona,$longitud,$latitud)
     {
 
