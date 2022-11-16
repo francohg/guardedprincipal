@@ -40,6 +40,17 @@ class Usuarios
             $e->getMessage();
         }
     }
+    public function Consultaalert()
+    {
+        try {
+            $query = $this->dbh->prepare("SELECT * FROM alertas");
+            $query->execute();
+            return $query->fetchAll();
+            $this->dbh = null;
+        }catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
     public function Consultacma($id)
     {
         try {
