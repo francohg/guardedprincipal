@@ -74,6 +74,9 @@
   <br />
   <br />
   <br />
+  <div class="row indicacion">
+    <h5>En este apartado podra asignarle un ruta a los camiones.</h5>
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -94,10 +97,28 @@
       </div>
     </div>
     <br>
+    <div class="row indicacion">
+      <h5>Aqui podra observar la rutas fijas eligiendo alguna de ellas.</h5>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <center>
+          <select name="rutas" id="pet">
+            <option value="0">Elige ruta</option>
+            <option value="1">Ruta 1</option>
+            <option value="2">Ruta 2</option>
+            <option value="3">Ruta 3</option>
+          </select>
+        </center>
+      </div>
+    </div>
     <div class="row">
       <button id="ingre">Ver rutas</button>
     </div>
     <br>
+    <div class="row indicacion">
+      <h5>Aqui podra ver el recorrido de algun camión "SIMULADO".</h5>
+    </div>
     <div class="row">
       <div class="col-lg-12">
         <center>
@@ -209,15 +230,21 @@
       alert("Operacion exitosa " + resultado);
     });
   }
-  $("#ingre").click(function () {
-    window.location.href = "Mapa.html";
-  });
   $("#rut").click(function () {
     var placas = $("#pet-select").val();
     if(placas=="0"){
       alert("Escoje un camion");
     }else{
       window.location.href = "Mapa2.php?camion="+placas;
+    }
+    
+  });
+  $("#ingre").click(function () {
+    var ru = $("#pet").val();
+    if(ru=="0"){
+      alert("Escoje una ruta");
+    }else{
+      window.location.href = "Mapa3.php?ruta="+ru;
     }
     
   });

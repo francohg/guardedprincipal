@@ -3,14 +3,14 @@ $id = $_GET["camion"];
 ?>
 <script src="jquery-3.6.0.min.js"></script>
 <script>
-  let arreglo = [];
+  var arreglo = [];
   var arreglo2=[];
   $(document).ready(function() {
     var rut="";
     var id = <?php echo $id; ?>;
     let parametros = {
       "id": id
-    }; 
+    };
     $.post("consultacam.php", parametros, function(resultado) {
       rut = resultado;
       if (rut == "1" ){
@@ -38,7 +38,8 @@ $id = $_GET["camion"];
         arreglo2.push(coords12);
         arreglo2.push(coords15);
         console.log(arreglo2); 
-      }else if(rut == "2"){
+      }
+      else if(rut == "2"){
         console.log(rut);
         const coords = { lat: 19.77039, lng: -98.57955 };
         const coords2 = { lat: 19.77057, lng: -98.57883 };
@@ -90,22 +91,16 @@ $id = $_GET["camion"];
         console.log(arreglo2); 
       }
     });
-    alert(rut+"Bienvenido a las rutas ");
+    alert(" Bienvenido a las rutas");
     let parametros1 = {
       "ruta": rut
     };
-    $.post("consultrut.php", parametros1, function(resultado) {
-      var b = resultado.split("/*-");
-      alert("longitud:"+b[0]+" latitud:"+b[1]);
-    });
-    //$.post("consulstat.php", parametros, function (resp) {
-      //var a = resp.split("\n");
-      //for (var i = 0; i < a.length - 1; i++) {
-        //var b = a[i].split("+-+");
-        //alert("Longitud:"+b[0]+" Latitud:"+b[1]);
-      //}
+    //$.post("consultrut.php", parametros1, function(resultado) {
+      //var b = resultado.split("/*-");
+      //alert("longitud:"+b[0]+" latitud:"+b[1]);
+      //console.log(b[0]);
     //});
-      $.post("consulstat.php", parametros, function (resp) {
+    $.post("consulstat.php", parametros, function (resp) {
       var a = resp.split("\n");
       for (var i = 0; i < a.length - 1; i++) {
         var b = a[i].split("+-+");
@@ -146,50 +141,21 @@ $id = $_GET["camion"];
     const mapDiv = document.getElementById("map");
     let map;
     let marker;
+    
 
     function initMap() {
 
       map = new google.maps.Map(mapDiv, {
-        center: coords,
+        center: arreglo[0],
         zoom: 14,
       });
       let n = 0;
       let m = 1;
-      
-      function trazo(){
-        if (n < arreglo2.length) {
-          var objConfigDr = {
-            map: map,
-            polylineOptions: { strokeColor: "#000000" }
-          }
-          var objConfigDs = {
-            origin: arreglo2[n],
-            destination: arreglo2[m],
-            travelMode: google.maps.TravelMode.WALKING
-          }
-          var ds = new google.maps.DirectionsService();
-          var dr = new google.maps.DirectionsRenderer(objConfigDr);
-
-          ds.route(objConfigDs, fnRutear);
-
-          function fnRutear(resultados, status) {
-            if (status == 'OK') {
-              dr.setDirections(resultados);
-            } else {
-              alert('Error' + status);
-            }
-          }
-          n = n + 1;
-          m = m + 1;
-          trazo();
-        }
-      }
-      trazo();
-
       function recorrido() {
         if (n < arreglo.length) {
           var objConfigDr = {
-            map: map
+            map: map,
+            polylineOptions: { strokeColor: "#F50938", strokeWeight: 6}
           }
           var objConfigDs = {
             origin: arreglo[n],
@@ -225,5 +191,4 @@ $id = $_GET["camion"];
   </script>
 
 </body>
-
 </html>
