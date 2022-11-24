@@ -21,4 +21,8 @@ td {
   color: white;
   font-family: 'Times New Roman', Times, serif;
 }
+div .indicacion{
+  text-align: center;
+  color: red;
+}
 

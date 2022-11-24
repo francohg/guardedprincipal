@@ -27,10 +27,10 @@ if ($cuen == "2"||$cuen == 2) {
     $longitud = array('-98.57955','-98.57883','-98.57853','-98.57776','-98.57572','-98.57316','-98.57068','-98.56849','-98.57015','-98.57453','-98.57828');
 }
 if ($cuen == "3"||$cuen == 3) {
-    $latitud = array('19.770797', '19.770665', '19.772133', '19.770508', '19.770081', '19.771638', '19.771758', '19.770157', '19.769459', '19.771037', '19.770476');
+    $latitud = array('19.77039','19.7706','19.77119','19.77154','19.77373','19.77386','19.77185','19.77254','19.77453','19.77529','19.77317');
     $longitud = array('-98.57954','-98.57882','-98.57895','-98.57773','-98.57843','-98.57783','-98.57654','-98.57415','-98.57478','-98.57244','-98.57178');
 }
-$usuarios->insertarstatu($camion, $ruta, $latitud[$cont], $longitud[$cont], $velocidad, $combustible, $fecha);
+$usuarios->insertarstatu($camion, $cuen, $latitud[$cont], $longitud[$cont], $velocidad, $combustible, $fecha);
 $data = $usuarios->Consultaruta($cuen);
 if (count($data) > 0) {
     foreach ($data as $fila) {
